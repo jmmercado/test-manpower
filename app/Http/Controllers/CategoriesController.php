@@ -14,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Categories::all();
+        $categories = Categories::paginate(5);
 
         return view('categories.index', compact('categories'));
     }

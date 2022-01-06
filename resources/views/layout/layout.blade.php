@@ -14,7 +14,9 @@
 
 <body>
     @include('layout.nav')
-    @yield('content')
+    <div class="container mt-5">
+        @yield('content')
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
