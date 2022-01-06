@@ -14,10 +14,12 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Jesus Miguel Mercado
+              @if (Auth::check())
+                  {{Auth::user()->name}}
+              @endif
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+              <li><a class="dropdown-item" href="{{route('logout')}}">Cerrar Sesión</a></li>
             </ul>
           </li>
         </ul>

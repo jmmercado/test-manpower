@@ -13,10 +13,12 @@
 </head>
 
 <body>
-    @include('layout.nav')
+    @if (Auth::check())
+        @include('layout.nav')
+    @endif
+    
     <div class="container mt-5">
-        @yield('content-categories')
-        @yield('content-products')
+        @yield('content')
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
 

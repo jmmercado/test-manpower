@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('content-categories')
+@section('content')
 <div class="card shadow p-3 mb-5 bg-body rounded">
     <div class="card-header">
       <h4>Registrar Categoría</h4>

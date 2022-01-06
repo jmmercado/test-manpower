@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -15,7 +16,11 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::paginate(5);
+        $products = Products::select('products.*', 'categories.name as category', 'users.name as user')
+            ->join('categories', 'categories.id', 'products.category_id')
+            ->join('users', 'users.id', 'products.user_id')
+            ->paginate(5);
+        // return $products;
 
         return view('products.index', compact('products'));
     }
@@ -35,14 +40,18 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
             'name' => 'required|min:3|max:50',
+            'quantity' => 'required',
             'category' => 'required'
         ]);
 
         $new_product = new Products();
         $new_product->name = $request->name;
         $new_product->category_id = $request->category;
+        $new_product->user_id = Auth::user()->id;
+        $new_product->quantity = $request->quantity;
         $new_product->save();
 
         return redirect(route('product.index'))->with('msg', 'Registro Exitoso');

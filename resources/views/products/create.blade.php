@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('content-products')
+@section('content')
 <div class="card shadow p-3 mb-5 bg-body rounded">
     <div class="card-header">
       <h4>Registrar Producto</h4>
@@ -12,6 +12,13 @@
                 <label for="name" class="form-label">Nombre del producto</label>
                 <input type="text" name="name" class="form-control" id="name" placeholder="">
                 @error('name')
+                    <span class="text-danger text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="quantity " class="form-label">Cantidad</label>
+                <input type="number" name="quantity" class="form-control" id="quantity " placeholder="">
+                @error('quantity ')
                     <span class="text-danger text-sm">{{ $message }}</span>
                 @enderror
             </div>
