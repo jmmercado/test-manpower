@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/categories', [CategoriesController::class, 'index']);
