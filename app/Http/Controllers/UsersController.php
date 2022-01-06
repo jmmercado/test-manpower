@@ -26,7 +26,7 @@ class UsersController extends Controller
                 return redirect(route('category.index'));
             }
         } else {
-            return redirect(route('login'))->with('msg', 'Usuario y/o COntraseña Incorrecta');
+            return redirect(route('viewLogin'))->with('msg', 'Usuario y/o Contraseña Incorrecta');
         }
     }
 
