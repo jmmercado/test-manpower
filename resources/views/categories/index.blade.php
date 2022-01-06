@@ -3,10 +3,18 @@
 @section('content')
 <div class="card shadow p-3 mb-5 bg-body rounded">
     <div class="card-header">
-      Categorias
-      <div class="text-end"> <button class="btn btn-primary text-end">Nueva Categoría</button></div>
+        <h4>Categorias</h4>
+        <div class="text-end">
+          <a href="{{route('categorie.create')}}" class="btn btn-primary text-end">Nueva Categoría</a>
+        </div>
      
     </div>
+    @if (session('msg'))
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <strong>Enhorabuena!</strong> {{session('msg')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="card-body">
         <table class="table">
             <thead>
@@ -24,8 +32,14 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->created_at}}</td>
                     <td>
-                        <button class="btn btn-success">Editar</button>
-                        <button class="btn btn-danger">Eliminar</button>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <a href="{{route('categorie.edit', $item->id)}}" class="btn btn-success">Editar</a>
+                            <form action="{{route('categorie.delete', $item->id)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <a type="submit" class="btn btn-danger" onclick="alert('Esta seguro que deseas elimenar el registro')">Eliminar</a>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

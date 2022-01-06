@@ -25,9 +25,25 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        return view('categories.create');
+    }
+
     public function store(Request $request)
     {
-        //
+        $request->validate(['name' => 'required']);
+        $new_categorie = new Categories();
+        $new_categorie->name = $request->name;
+        $new_categorie->save();
+
+        return redirect(route('categorie.index'))->with('msg', 'Registro Exitoso');
+    }
+
+    public function edit($id)
+    {
+        $category = Categories::find($id);
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -50,7 +66,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(['name' => 'required']);
+        $category = Categories::find($id);
+        $category->name = $request->name;
+        $category->update();
+        return redirect(route('categorie.index'))->with('msg', 'Actualizacion Exitosa');
     }
 
     /**
@@ -61,6 +81,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Categories::find($id);
+        $category->delete();
+        return redirect(route('categorie.index'))->with('msg', 'Eliminación Exitosa');
     }
 }

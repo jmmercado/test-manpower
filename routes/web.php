@@ -19,4 +19,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/categories', [CategoriesController::class, 'index']);
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categorie.index');
+Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categorie.create');
+Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categorie.store');
+Route::get('/categories/edit/{id}', [CategoriesController::class, 'edit'])->name('categorie.edit');
+Route::put('/categories/update/{id}', [CategoriesController::class, 'update'])->name('categorie.update');
+Route::delete('/categories/delete/{id}', [CategoriesController::class, 'destroy'])->name('categorie.delete');
