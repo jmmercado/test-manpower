@@ -6,7 +6,7 @@
       <h4>Editar Categoría {{$category->name}}</h4>
     </div>
     <div class="card-body">
-        <form action="{{route('categorie.update', $category->id)}}" method="POST">
+        <form action="{{route('category.update', $category->id)}}" method="POST">
             @method('PUT')
             @csrf
             <div class="mb-3">
@@ -17,7 +17,7 @@
                 @enderror
             </div>
             <button class="btn btn-success">Actualizar</button>
-            <a href="{{route('categorie.index')}}" class="btn btn-danger">Cancelar</a>
+            <a href="{{route('category.index')}}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>
   </div>

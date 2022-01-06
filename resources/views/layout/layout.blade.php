@@ -15,7 +15,8 @@
 <body>
     @include('layout.nav')
     <div class="container mt-5">
-        @yield('content')
+        @yield('content-categories')
+        @yield('content-products')
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
 

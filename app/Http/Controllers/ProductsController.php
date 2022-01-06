@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Categories::paginate(5);
+        $products = Products::paginate(5);
 
-        return view('categories.index', compact('categories'));
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -25,25 +26,26 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        return view('categories.create');
+        $categories = Categories::all();
+        return view('products.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
-        $new_categorie = new Categories();
-        $new_categorie->name = $request->name;
-        $new_categorie->save();
+        $request->validate([
+            'name' => 'required|min:3|max:50',
+            'category' => 'required'
+        ]);
 
-        return redirect(route('categorie.index'))->with('msg', 'Registro Exitoso');
-    }
+        $new_product = new Products();
+        $new_product->name = $request->name;
+        $new_product->category_id = $request->category;
+        $new_product->save();
 
-    public function edit($id)
-    {
-        $category = Categories::find($id);
-        return view('categories.edit', compact('category'));
+        return redirect(route('product.index'))->with('msg', 'Registro Exitoso');
     }
 
     /**
@@ -66,11 +68,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['name' => 'required']);
-        $category = Categories::find($id);
-        $category->name = $request->name;
-        $category->update();
-        return redirect(route('category.index'))->with('msg', 'Actualizacion Exitosa');
+        //
     }
 
     /**
@@ -81,8 +79,6 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Categories::find($id);
-        $category->delete();
-        return redirect(route('category.index'))->with('msg', 'Eliminación Exitosa');
+        //
     }
 }
