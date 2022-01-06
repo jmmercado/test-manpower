@@ -27,7 +27,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('category.create');
     }
 
     public function store(Request $request)
@@ -37,7 +37,7 @@ class CategoriesController extends Controller
         $new_categorie->name = $request->name;
         $new_categorie->save();
 
-        return redirect(route('categorie.index'))->with('msg', 'Registro Exitoso');
+        return redirect(route('category.index'))->with('msg', 'Registro Exitoso');
     }
 
     public function edit($id)

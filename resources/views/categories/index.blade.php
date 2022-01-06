@@ -37,7 +37,7 @@
                             <form action="{{route('category.delete', $item->id)}}" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <a type="submit" class="btn btn-danger" onclick="alert('Esta seguro que deseas elimenar el registro')">Eliminar</a>
+                                <button type="submit" class="btn btn-danger" onclick="alert('Esta seguro que deseas elimenar el registro')">Eliminar</button>
                             </form>
                         </div>
                     </td>

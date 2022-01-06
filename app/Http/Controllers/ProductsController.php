@@ -20,7 +20,6 @@ class ProductsController extends Controller
             ->join('categories', 'categories.id', 'products.category_id')
             ->join('users', 'users.id', 'products.user_id')
             ->paginate(5);
-        // return $products;
 
         return view('products.index', compact('products'));
     }
@@ -43,7 +42,7 @@ class ProductsController extends Controller
         // return $request;
         $request->validate([
             'name' => 'required|min:3|max:50',
-            'quantity' => 'required',
+            'quantity' => 'required|integer',
             'category' => 'required'
         ]);
 
@@ -55,6 +54,13 @@ class ProductsController extends Controller
         $new_product->save();
 
         return redirect(route('product.index'))->with('msg', 'Registro Exitoso');
+    }
+
+    public function edit($id)
+    {
+        $product = Products::find($id);
+        $categories = Categories::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -77,7 +83,19 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:50',
+            'quantity' => 'required|integer',
+            'category' => 'required'
+        ]);
+
+        $product = Products::find($id);
+        $product->name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->category_id = $request->category;
+        $product->user_id = Auth::user()->id;
+        $product->update();
+        return redirect(route('product.index'))->with('msg', 'Actualizacion Exitosa');
     }
 
     /**
@@ -88,6 +106,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Products::find($id);
+        $product->delete();
+        return redirect(route('product.index'))->with('msg', 'Eliminación Exitosa');
     }
 }

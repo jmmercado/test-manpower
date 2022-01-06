@@ -18,7 +18,7 @@
             <div class="mb-3">
                 <label for="quantity " class="form-label">Cantidad</label>
                 <input type="number" name="quantity" class="form-control" id="quantity " placeholder="">
-                @error('quantity ')
+                @error('quantity')
                     <span class="text-danger text-sm">{{ $message }}</span>
                 @enderror
             </div>
